@@ -173,10 +173,6 @@ The server serves the built React app in production mode.
 | DELETE | `/api/tasks/:id` | Delete task |
 | GET | `/api/tasks/dashboard/stats` | Dashboard stats |
 
-## 📸 Screenshots
-
-*Screenshots will be added after deployment*
-
 ## 📄 License
 
 MIT
