@@ -23,11 +23,20 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/projects', require('./routes/projects'));
 app.use('/api/tasks', require('./routes/tasks'));
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/dist')));
+const fs = require('fs');
+const clientDistPath = path.join(__dirname, '../client/dist');
+
+if (fs.existsSync(clientDistPath)) {
+  console.log('Serving frontend from:', clientDistPath);
+  app.use(express.static(clientDistPath));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+} else {
+  console.log('Frontend build not found at:', clientDistPath);
+  app.get('*', (req, res) => {
+    res.status(404).send('Frontend build not found. The client build step may have failed during deployment.');
   });
 }
 
