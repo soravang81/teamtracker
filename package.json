@@ -7,6 +7,6 @@
     "dev:server": "npm run dev --prefix server",
     "dev:client": "npm run dev --prefix client",
     "build": "npm run build --prefix client",
-    "start": "npm start --prefix server"
+    "start": "npm run build --prefix client && npm start --prefix server"
   }
 }
